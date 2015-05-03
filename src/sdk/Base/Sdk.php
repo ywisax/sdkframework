@@ -367,6 +367,54 @@ class Sdk extends Object
     }
 
     /**
+     * 类自动加载器，需要手动激活：
+     *
+     *    spl_autoload_register(['Sdk', 'autoLoad']);
+     *
+     * @param   string $class     类名
+     * @param   string $directory 要搜索的文件夹
+     *
+     * @return  boolean
+     */
+    public static function autoLoad($class, $directory = 'classes')
+    {
+        // PSR-加载规范
+        $class = ltrim($class, '\\');
+        $file = '';
+
+        // 如果命名空间的第一层是小写单词，那么就替换查找目录
+        if ($firstNamespacePosition = strpos($class, '\\'))
+        {
+            $namespace = substr($class, 0, $firstNamespacePosition);
+            // 第一层为小写
+            if (strtolower($namespace) === $namespace)
+            {
+                $directory = strtolower($namespace);
+                // 因为第一层已经做目录了，下面还会把命名空间作为目录层次来处理
+                // 所以在这里，就应该先把第一层去掉
+                $class = substr($class, strlen($namespace) + 1);
+            }
+        }
+
+        // 截取命名空间
+        if ($lastNamespacePosition = strripos($class, '\\'))
+        {
+            $namespace = substr($class, 0, $lastNamespacePosition);
+            $class = substr($class, $lastNamespacePosition + 1);
+            $file = str_replace('\\', DIRECTORY_SEPARATOR, $namespace) . DIRECTORY_SEPARATOR;
+        }
+
+        $file .= str_replace('_', DIRECTORY_SEPARATOR, $class);
+
+        if ($path = self::findFile($directory, $file))
+        {
+            require $path;
+            return true;
+        }
+        return false;
+    }
+
+    /**
      * 使用级联文件系统来查找文件
      * 如果搜索的是`config`、`messages`、`i18n`目录，那么系统会查找所有路径并合并
      *

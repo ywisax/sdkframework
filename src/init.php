@@ -18,6 +18,14 @@ if ( ! defined('SYSPATH'))
     define('SYSPATH', __DIR__ . DIRECTORY_SEPARATOR);
 }
 
+/**
+ * 激活自动加载器
+ */
+spl_autoload_register([
+    'sdk\Base\Sdk',
+    'autoLoad'
+]);
+
 if ( ! function_exists('__'))
 {
     /**
