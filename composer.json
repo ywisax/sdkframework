@@ -14,7 +14,6 @@
     "doctrine/dbal": "~2.5",
     "symfony/config": "~2.6",
     "monolog/monolog": "~1.13",
-    "bshaffer/oauth2-server-php": "~1.7",
     "hoa/mime": "2.15.02.24",
     "doctrine/inflector": "~1.0",
     "hassankhan/config": "0.8.*",
