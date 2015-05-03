@@ -123,6 +123,11 @@ class Sdk extends Object
     public static $indexFile = 'index.php';
 
     /**
+     * @var array 日志配置信息
+     */
+    public static $logConfig = null;
+
+    /**
      * @var  string  文件缓存使用的目录
      */
     public static $cacheDir;
@@ -188,21 +193,6 @@ class Sdk extends Object
      * @var  object  SAE缓存
      */
     protected static $_saeMemcache = null;
-
-    /**
-     * @var bool 是否激活runtime功能
-     */
-    public static $runtimeActive = false;
-
-    /**
-     * @var string runtime保存路径
-     */
-    public static $runtimePath = DOCROOT;
-
-    /**
-     * @var string  编译缓存和合并文件
-     */
-    public static $runtimeName = 'runtime.php';
 
     /**
      * @var array SDK工作流分层

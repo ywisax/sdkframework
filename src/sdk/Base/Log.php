@@ -39,7 +39,7 @@ class Log
         {
             self::$_instance = new Logger('default');
 
-            $logFile = DOCROOT.'tmp/log/'.date('Y/md').'.log';
+            $logFile = Sdk::$logConfig['file'];
             @mkdir(dirname($logFile), 0666, true);
 
             self::$_instance->pushHandler(new StreamHandler($logFile));
