@@ -13,9 +13,9 @@ if ( ! defined('SDK_START_MEMORY'))
 }
 
 // 框架目录
-if ( ! defined('SDK_PATH'))
+if ( ! defined('SYSPATH'))
 {
-    define('SDK_PATH', __DIR__ . DIRECTORY_SEPARATOR);
+    define('SYSPATH', __DIR__ . DIRECTORY_SEPARATOR);
 }
 
 if ( ! function_exists('__'))
